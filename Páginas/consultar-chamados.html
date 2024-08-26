@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar e Editar Dados</title>
+    <link rel="stylesheet" href="../CSS/style4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navegacao">
+        <img src="../imagens/Servicenow.png" alt="Logo" class="logo">
+        <ul>
+            <li><a href="#"><i class="fas fa-folder-open"></i> Consultar Dados</a></li>
+            <li><a href="abrir-chamados.html"><i class="fas fa-plus-circle"></i> Abrir Novo Chamado</a></li>
+            <li><a href="index.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <h1>Consultar e Editar Dados</h1>
+        <div id="topics-container"></div>
+    </div>
+
+    <script>
+        function loadData() {
+            const topics = ['rede', 'equipamento', 'login'];
+            const topicsContainer = document.getElementById('topics-container');
+            topicsContainer.innerHTML = ''; 
+
+            topics.forEach(topic => {
+                const topicContainer = document.createElement('div');
+                topicContainer.classList.add('topic-container');
+
+                
+                const topicHeader = document.createElement('div');
+                topicHeader.classList.add('topic-header');
+                topicHeader.textContent = topic.charAt(0).toUpperCase() + topic.slice(1);
+                topicHeader.onclick = () => toggleTopicContent(topic);
+                topicContainer.appendChild(topicHeader);
+
+               
+                const topicContent = document.createElement('div');
+                topicContent.classList.add('topic-content');
+                topicContent.id = `${topic}-content`;
+
+                
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith(topic)) {
+                        const data = JSON.parse(localStorage.getItem(key));
+                        const dataBlock = document.createElement('div');
+                        dataBlock.classList.add('data-block');
+
+                        let dataHtml = `<h3>${key.charAt(0).toUpperCase() + key.slice(1)}</h3>`;
+                        if (Array.isArray(data)) {
+                            data.forEach((item, index) => {
+                                for (const [field, value] of Object.entries(item)) {
+                                    dataHtml += `
+                                        <div class="data-item">
+                                            <label>${field.charAt(0).toUpperCase() + field.slice(1)}:</label>
+                                            <input type="text" value="${value}" id="${key}-${index}-${field}" />
+                                        </div>
+                                    `;
+                                }
+                                dataHtml += `<button onclick="saveData('${key}', ${index})">Salvar Alterações</button>`;
+                            });
+                        } else {
+                            for (const [field, value] of Object.entries(data)) {
+                                dataHtml += `
+                                    <div class="data-item">
+                                        <label>${field.charAt(0).toUpperCase() + field.slice(1)}:</label>
+                                        <input type="text" value="${value}" id="${key}-${field}" />
+                                    </div>
+                                `;
+                            }
+                            dataHtml += `<button onclick="saveData('${key}')">Salvar Alterações</button>`;
+                        }
+
+                        dataBlock.innerHTML = dataHtml;
+                        topicContent.appendChild(dataBlock);
+                    }
+                });
+
+                topicContainer.appendChild(topicContent);
+                topicsContainer.appendChild(topicContainer);
+            });
+        }
+
+        function toggleTopicContent(topic) {
+            const topicContent = document.getElementById(`${topic}-content`);
+            const isVisible = topicContent.style.display === 'block';
+            topicContent.style.display = isVisible ? 'none' : 'block';
+        }
+
+        function saveData(key, index = null) {
+            const data = {};
+            if (index !== null) {
+                const inputs = document.querySelectorAll(`input[id^="${key}-${index}-"]`);
+                inputs.forEach(input => {
+                    const field = input.id.replace(`${key}-${index}-`, '');
+                    if (!data[index]) data[index] = {};
+                    data[index][field] = input.value;
+                });
+                localStorage.setItem(key, JSON.stringify(Object.values(data)));
+            } else {
+                const inputs = document.querySelectorAll(`input[id^="${key}-"]`);
+                inputs.forEach(input => {
+                    const field = input.id.replace(`${key}-`, '');
+                    data[field] = input.value;
+                });
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+            alert('Dados atualizados com sucesso!');
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>
