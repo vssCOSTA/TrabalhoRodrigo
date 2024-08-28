@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navegacao">
@@ -19,9 +20,15 @@
     <div class="main-container">
         <div class="sidebar">
             <ul class="menu">
-                <li class="menu-item" onclick="showSubMenu('rede')">Rede</li>
-                <li class="menu-item" onclick="showSubMenu('equipamento')">Equipamento</li>
-                <li class="menu-item" onclick="showSubMenu('login')">Login</li>
+                <li class="menu-item" onclick="showSubMenu('rede')">
+                    <i class="fas fa-network-wired"></i> Rede
+                </li>
+                <li class="menu-item" onclick="showSubMenu('equipamento')">
+                    <i class="fas fa-laptop"></i> Equipamento
+                </li>
+                <li class="menu-item" onclick="showSubMenu('login')">
+                    <i class="fas fa-user"></i> Login
+                </li>
             </ul>
         </div>
         <div class="content">
@@ -42,7 +49,6 @@
                 }
             });
 
-            
             const formContainer = document.getElementById('form-container');
             const forms = {
                 rede: `
@@ -110,41 +116,34 @@
                 });
             }
 
-            
             document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); 
-        
-        const formData = new FormData(form);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); 
+                    
+                    const formData = new FormData(form);
+                    const formObject = {};
+                    formData.forEach((value, key) => {
+                        formObject[key] = value;
+                    });
 
-        
-        const storageKey = form.id.replace('-form', '');
+                    const storageKey = form.id.replace('-form', '');
 
-        
-        let existingData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                    let existingData = JSON.parse(localStorage.getItem(storageKey)) || [];
 
-        
-        if (!Array.isArray(existingData)) {
-            existingData = [];
+                    if (!Array.isArray(existingData)) {
+                        existingData = [];
+                    }
+
+                    existingData.push(formObject);
+
+                    localStorage.setItem(storageKey, JSON.stringify(existingData));
+
+                    form.reset();
+                });
+            });
         }
 
         
-        existingData.push(formObject);
-
-        
-        localStorage.setItem(storageKey, JSON.stringify(existingData));
-
-        alert('Dados salvos no localStorage!');
-    });
-});
-
-        }
-
-        // Inicializa com o menu de rede visível
         showSubMenu('rede');
     </script>
 </body>

@@ -24,15 +24,35 @@
                 <h1>LOGIN</h1>
                 <div class="textfield">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" placeholder="Digite seu usuário">
+                    <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário">
                 </div>
                 <div class="textfield"> 
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" placeholder="Digite a sua senha">
+                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha">
                 </div>
-                <button class="btn-login">LOGIN</button>
+                <button class="btn-login" onclick="verificarLogin()">LOGIN</button>
+                <p id="error-message" style="color: red; display: none;">Usuário ou senha incorretos. Tente novamente.</p>
             </div>
         </div>
     </div>
+
+    <script>
+        
+        const usuarioCorreto = "adm";
+        const senhaCorreta = "adm";
+
+        function verificarLogin() {
+            const usuario = document.getElementById('usuario').value;
+            const senha = document.getElementById('senha').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (usuario === usuarioCorreto && senha === senhaCorreta) {
+                
+                window.location.href = "tela-principal.html";
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
