@@ -172,3 +172,9 @@ button:active {
     background-color: #cc0000;
 }
 
+#no-data-message {
+    color: #ff4d4d;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}

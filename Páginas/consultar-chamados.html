@@ -32,7 +32,9 @@
             </ul>
         </div>
         <div class="content">
-            <div id="topics-container"></div>
+            <div id="topics-container">
+                <p id="no-data-message" style="display: none;">Nenhum chamado para visualização.</p>
+            </div>
         </div>
     </div>
 
@@ -40,12 +42,17 @@
         function loadData() {
             const topics = ['rede', 'equipamento', 'login'];
             const topicsContainer = document.getElementById('topics-container');
+            const noDataMessage = document.getElementById('no-data-message');
             topicsContainer.innerHTML = ''; 
+
+            let hasData = false; // Flag to check if there's any data
 
             topics.forEach(topic => {
                 const topicContent = document.createElement('div');
                 topicContent.classList.add('topic-content');
                 topicContent.id = `${topic}-content`;
+
+                let topicHasData = false; // Flag for each topic
 
                 Object.keys(localStorage).forEach(key => {
                     if (key.startsWith(topic)) {
@@ -88,11 +95,17 @@
 
                         dataCard.innerHTML = dataHtml;
                         topicContent.appendChild(dataCard);
+                        topicHasData = true;
                     }
                 });
 
-                topicsContainer.appendChild(topicContent);
+                if (topicHasData) {
+                    topicsContainer.appendChild(topicContent);
+                    hasData = true;
+                }
             });
+
+            noDataMessage.style.display = hasData ? 'none' : 'block';
         }
 
         function toggleTopicContent(topic) {
