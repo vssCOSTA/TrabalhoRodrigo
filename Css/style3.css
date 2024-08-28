@@ -16,19 +16,13 @@
 .logo {
     height: 80px; 
     width: auto;
-    animation: float 3s ease-in-out infinite; 
     cursor: pointer; 
 }
-
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px); 
-    }
+.menu-item i {
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
 }
+
+
 
 
 body {
