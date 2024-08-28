@@ -9,23 +9,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 </head>
 <body>
     <nav class="navegacao">
         <a href="tela-principal.html">
             <img src="../imagens/Servicenow.png" alt="Logo" class="logo">
         </a>
-        <ul>
-            <li><a href="#"><i class="fas fa-folder-open"></i> Consultar Dados</a></li>
-            <li><a href="abrir-chamados.html"><i class="fas fa-plus-circle"></i> Abrir Novo Chamado</a></li>
-            <li><a href="index.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-        </ul>
     </nav>
 
-    <div class="main-content">
-        <h1>Consultar e Editar Dados</h1>
-        <div id="topics-container"></div>
+    <div class="main-container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li class="menu-item" onclick="toggleTopicContent('rede')">
+                    <i class="fas fa-network-wired"></i> Rede
+                </li>
+                <li class="menu-item" onclick="toggleTopicContent('equipamento')">
+                    <i class="fas fa-laptop"></i> Equipamento
+                </li>
+                <li class="menu-item" onclick="toggleTopicContent('login')">
+                    <i class="fas fa-user"></i> Login
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="topics-container"></div>
+        </div>
     </div>
 
     <script>
@@ -35,31 +43,20 @@
             topicsContainer.innerHTML = ''; 
 
             topics.forEach(topic => {
-                const topicContainer = document.createElement('div');
-                topicContainer.classList.add('topic-container');
-
-                
-                const topicHeader = document.createElement('div');
-                topicHeader.classList.add('topic-header');
-                topicHeader.textContent = topic.charAt(0).toUpperCase() + topic.slice(1);
-                topicHeader.onclick = () => toggleTopicContent(topic);
-                topicContainer.appendChild(topicHeader);
-
-               
                 const topicContent = document.createElement('div');
                 topicContent.classList.add('topic-content');
                 topicContent.id = `${topic}-content`;
 
-                
                 Object.keys(localStorage).forEach(key => {
                     if (key.startsWith(topic)) {
                         const data = JSON.parse(localStorage.getItem(key));
-                        const dataBlock = document.createElement('div');
-                        dataBlock.classList.add('data-block');
+                        const dataCard = document.createElement('div');
+                        dataCard.classList.add('data-card');
 
                         let dataHtml = `<h3>${key.charAt(0).toUpperCase() + key.slice(1)}</h3>`;
                         if (Array.isArray(data)) {
                             data.forEach((item, index) => {
+                                dataHtml += `<div class="data-item-container">`;
                                 for (const [field, value] of Object.entries(item)) {
                                     dataHtml += `
                                         <div class="data-item">
@@ -68,9 +65,13 @@
                                         </div>
                                     `;
                                 }
-                                dataHtml += `<button onclick="saveData('${key}', ${index})">Salvar Alterações</button>`;
+                                dataHtml += `<div class="actions">
+                                    <button onclick="saveData('${key}', ${index})">Salvar Alterações</button>
+                                    <button class="delete" onclick="deleteData('${key}', ${index})">Resolvido</button>
+                                </div></div>`;
                             });
                         } else {
+                            dataHtml += `<div class="data-item-container">`;
                             for (const [field, value] of Object.entries(data)) {
                                 dataHtml += `
                                     <div class="data-item">
@@ -79,23 +80,29 @@
                                     </div>
                                 `;
                             }
-                            dataHtml += `<button onclick="saveData('${key}')">Salvar Alterações</button>`;
+                            dataHtml += `<div class="actions">
+                                <button onclick="saveData('${key}')">Salvar Alterações</button>
+                                <button class="delete" onclick="deleteData('${key}')">Resolvido</button>
+                            </div></div>`;
                         }
 
-                        dataBlock.innerHTML = dataHtml;
-                        topicContent.appendChild(dataBlock);
+                        dataCard.innerHTML = dataHtml;
+                        topicContent.appendChild(dataCard);
                     }
                 });
 
-                topicContainer.appendChild(topicContent);
-                topicsContainer.appendChild(topicContainer);
+                topicsContainer.appendChild(topicContent);
             });
         }
 
         function toggleTopicContent(topic) {
+            const allTopics = document.querySelectorAll('.topic-content');
+            allTopics.forEach(content => {
+                content.style.display = 'none';
+            });
+
             const topicContent = document.getElementById(`${topic}-content`);
-            const isVisible = topicContent.style.display === 'block';
-            topicContent.style.display = isVisible ? 'none' : 'block';
+            topicContent.style.display = 'block';
         }
 
         function saveData(key, index = null) {
@@ -117,6 +124,21 @@
                 localStorage.setItem(key, JSON.stringify(data));
             }
             alert('Dados atualizados com sucesso!');
+        }
+
+        function deleteData(key, index = null) {
+            if (index !== null) {
+                let data = JSON.parse(localStorage.getItem(key));
+                data.splice(index, 1);
+                if (data.length > 0) {
+                    localStorage.setItem(key, JSON.stringify(data));
+                } else {
+                    localStorage.removeItem(key);
+                }
+            } else {
+                localStorage.removeItem(key);
+            }
+            loadData(); // Recarrega os dados após a exclusão
         }
 
         window.onload = loadData;

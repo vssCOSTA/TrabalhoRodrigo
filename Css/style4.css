@@ -17,103 +17,67 @@ body * {
 .navegacao {
     display: flex;
     align-items: center;
-    background: linear-gradient(45deg, #43a047, #388e3c);
-    padding: 15px 20px;
+    background: #43a047;
+    padding: 0 20px;
     z-index: 1;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
+    height: 100px;
     overflow: hidden;
-    height: 80px;
-}
-
-.logo {
-    height: 70px;
-    margin-right: 30px;
-    width: auto;
-}
-
-.navegacao ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding-left: 0;
-    flex-grow: 0.8;
-    justify-content: space-around;
-}
-
-.navegacao ul li {
     position: relative;
 }
 
-.navegacao ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.navegacao ul li a i {
-    margin-right: 8px;
-}
-
-.navegacao ul li a:hover {
-    color: #00e676;
-    transform: translateY(-3px);
-}
-
-.navegacao ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    background-color: #00e676;
-    left: 0;
-    bottom: -6px;
-    transition: width 0.3s;
-}
-
-.navegacao ul li a:hover::after {
-    width: 100%;
-}
-
-.main-content {
-    padding: 40px;
-    color: white;
-    text-align: left;
-}
-
-.topic-container {
-    margin-bottom: 20px;
-}
-
-.topic-header {
+.logo {
+    height: 80px;
+    width: auto;
     cursor: pointer;
-    font-weight: bold;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #333;
-    border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
-.topic-header:hover {
-    background-color: #e0e0e0;
-    color: #000;
+.main-container {
+    display: flex;
+    height: calc(100vh - 100px);
+}
+
+.sidebar {
+    width: 250px;
+    background: #2f2841;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-item {
+    padding: 10px;
+    color: #00ff88;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+    background: #00ff88;
+    color: #2b134b;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
 }
 
 .topic-content {
     display: none;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-top: none;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1); 
+    background: #2f2841;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.topic-content h3 {
+    color: #00ff88;
+    font-weight: 800;
 }
 
 .data-block {
@@ -122,18 +86,40 @@ body * {
     margin-bottom: 20px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
+.data-card {
+    background: #2f2841;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+
 .data-item {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
+}
+
+.data-item-container {
+    margin-bottom: 20px;
 }
 
 .data-item label {
     font-weight: bold;
     margin-right: 10px;
+    min-width: 150px; /* Define uma largura mínima para os rótulos */
+    flex-shrink: 0; /* Impede que o rótulo diminua */
+    text-align: right; /* Alinha o texto à direita */
 }
 
+
 .data-item input {
+    flex-grow: 1; /* Permite que o campo de entrada ocupe o espaço restante */
     padding: 5px;
     font-size: 16px;
     border-radius: 4px;
@@ -143,17 +129,46 @@ body * {
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #00e676;
+    padding: 15px;
+    background-color: #00ff88;
     border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
+    border-radius: 8px;
+    color: #2b134b;
+    font-weight: 800;
     cursor: pointer;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    box-shadow: 0px 10px 40px -12px #00ff8052;
+    transition: background 0.3s ease;
+    margin: 15px;
 }
 
 button:hover {
-    background-color: #00c853;
+    background-color: #00cc77;
 }
+
+button:active {
+    background-color: #009955;
+}
+
+.actions {
+    display: flex;
+    margin-left: 260px;
+    margin-top: 10px;
+}
+
+.actions button {
+    margin-left: 10px; /* Espaço entre os botões */
+}
+
+.actions button.save {
+    margin-left: 20px; /* Aumenta o espaço para o botão de salvar alterações */
+}
+
+.delete {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete:hover {
+    background-color: #cc0000;
+}
+
