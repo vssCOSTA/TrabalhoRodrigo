@@ -17,6 +17,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 
 .left-login {
@@ -114,16 +115,20 @@ body {
     .card-login {
         width: 85%;
     }
+
+    .left-login h1 {
+        font-size: 5vw;
+    }
+
+    .left-login-img {
+        width: 50vw;
+    }
 }
 
 @media (max-width: 600px) {
     .main-login {
         flex-direction: column;
         height: calc(100vh - 80px); 
-    }
-
-    .left-login  h1 {
-        display: none;
     }
 
     .left-login {
@@ -137,14 +142,28 @@ body {
     }
 
     .left-login-img {
-        width: 50vw;
+        width: 60vw;
     }
 
     .card-login {
         width: 90%;
+        padding: 20px 25px;
+    }
+
+    .btn-login {
+        margin: 20px 0;
+        padding: 14px 0;
+    }
+
+    .textfield input {
+        padding: 12px;
+        font-size: 11pt;
+    }
+
+    .textfield label {
+        font-size: 10pt;
     }
 }
-
 
 .navegacao {
     display: flex;
@@ -165,7 +184,6 @@ body {
     margin: auto;
 }
 
-/* Animação de flutuação */
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
@@ -174,5 +192,3 @@ body {
         transform: translateY(-10px); 
     }
 }
-
-

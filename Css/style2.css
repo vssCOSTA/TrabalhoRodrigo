@@ -51,15 +51,17 @@ body * {
     margin-right: 30px; 
     width: auto; 
 }
+
 .navegacao ul {
     list-style: none;
     display: flex;
     gap: 30px;
     margin: 0;
     padding-left: 0;
-    flex-grow: 0.8; 
+    flex-grow: 1; 
     justify-content: space-around; 
 }
+
 .navegacao ul li {
     position: relative;
 }
@@ -199,4 +201,70 @@ button:hover {
     margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+    .navegacao ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding-left: 20px;
+    }
 
+    .navegacao ul li a {
+        font-size: 16px;
+    }
+
+    .central-container {
+        padding: 20px;
+        height: auto;
+    }
+
+    .central-image {
+        max-width: 80%;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .data-item input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .logo {
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .navegacao {
+        height: auto;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navegacao ul {
+        padding-left: 10px;
+    }
+
+    .navegacao ul li a {
+        font-size: 14px;
+    }
+
+    .central-image {
+        max-width: 90%;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .topic-header {
+        font-size: 14px;
+    }
+}
