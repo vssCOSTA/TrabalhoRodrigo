@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamados</title>
+    <link rel="stylesheet" href="Css/abrir-chamados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navegacao">
+        <a href="tela-principal.html">
+            <img src="imagens/Servicenow.png" alt="Logo" class="logo">
+        </a>
+    </nav>
+    
+    <div class="main-container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li class="menu-item" onclick="showSubMenu('rede')">
+                    <i class="fas fa-network-wired"></i> Rede
+                </li>
+                <li class="menu-item" onclick="showSubMenu('equipamento')">
+                    <i class="fas fa-laptop"></i> Equipamento
+                </li>
+                <li class="menu-item" onclick="showSubMenu('login')">
+                    <i class="fas fa-user"></i> Login
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="form-container">
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/abrir-chamado.js"></script>
+    <script>       
+        showSubMenu('rede');
+    </script>
+</body>
+</html>

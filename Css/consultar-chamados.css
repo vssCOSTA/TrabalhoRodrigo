@@ -1,8 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
+/* Reset e configurações básicas */
 body {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
@@ -10,16 +6,13 @@ body {
     color: white;
 }
 
-body * {
-    box-sizing: border-box;
-}
-
+/* Navegação */
 .navegacao {
     display: flex;
     align-items: center;
     background: #43a047;
     padding: 0 20px;
-    z-index: 1;
+    /* z-index: 1; */
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100px;
@@ -33,11 +26,14 @@ body * {
     cursor: pointer;
 }
 
+/* Container principal */
 .main-container {
     display: flex;
+    flex-direction: row; /* Alinha barra lateral e conteúdo principal lado a lado */
     height: calc(100vh - 100px);
 }
 
+/* Sidebar */
 .sidebar {
     width: 250px;
     background: #2f2841;
@@ -48,6 +44,9 @@ body * {
 .menu {
     list-style: none;
     padding: 0;
+    display: flex; /* Exibe itens do menu em linha */
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    gap: 10px; /* Espaçamento entre itens do menu */
 }
 
 .menu-item {
@@ -55,6 +54,8 @@ body * {
     color: #00ff88;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
+    flex: 1 1 auto; /* Permite que os itens cresçam e encolham */
+    text-align: center; /* Centraliza o texto dos itens */
 }
 
 .menu-item:hover {
@@ -62,42 +63,36 @@ body * {
     color: #2b134b;
 }
 
+/* Conteúdo */
 .content {
     flex: 1;
     padding: 20px;
+    overflow-y: auto; /* Garante rolagem no conteúdo */
 }
 
 .topic-content {
-    display: none;
+    display: block; /* Altere para block se estiver usando display: none em outro lugar */
     background: #2f2841;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 10px 40px #00000056;
+    max-width: 1000px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
 }
+
 
 .topic-content h3 {
     color: #00ff88;
     font-weight: 800;
 }
 
-.data-block {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* Data blocks */
 .data-card {
     background: #2f2841;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0px 10px 40px #00000056;
 }
-
 
 .data-item {
     display: flex;
@@ -106,7 +101,8 @@ body * {
 }
 
 .data-item-container {
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .data-item label {
@@ -116,7 +112,6 @@ body * {
     flex-shrink: 0; /* Impede que o rótulo diminua */
     text-align: right; /* Alinha o texto à direita */
 }
-
 
 .data-item input {
     flex-grow: 1; /* Permite que o campo de entrada ocupe o espaço restante */
@@ -151,7 +146,6 @@ button:active {
 
 .actions {
     display: flex;
-    margin-left: 260px;
     margin-top: 10px;
 }
 
@@ -177,4 +171,53 @@ button:active {
     font-size: 18px;
     text-align: center;
     margin-top: 20px;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Muda para coluna em telas menores */
+        height: auto; /* Ajusta a altura conforme o conteúdo */
+    }
+
+    .sidebar {
+        width: 100%;
+        box-shadow: none; /* Remove a sombra da sidebar em telas pequenas */
+        padding: 10px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .actions {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .actions button {
+        margin-left: 0;
+        margin-top: 10px; /* Adiciona espaço entre os botões na coluna */
+    }
+
+    .data-item-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .data-item label {
+        font-size: 14px; /* Reduz o tamanho da fonte do rótulo */
+    }
+
+    .data-item input {
+        font-size: 14px; /* Reduz o tamanho da fonte do input */
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px; /* Reduz o tamanho da fonte dos botões */
+    }
 }

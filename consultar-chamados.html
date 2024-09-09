@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar e Editar Dados</title>
+    <link rel="stylesheet" href="Css/consultar-chamados.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navegacao">
+        <a href="tela-principal.html">
+            <img src="imagens/Servicenow.png" alt="Logo" class="logo">
+        </a>
+    </nav>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li class="menu-item" onclick="toggleTopicContent('rede')">
+                    <i class="fas fa-network-wired"></i> Rede
+                </li>
+                <li class="menu-item" onclick="toggleTopicContent('equipamento')">
+                    <i class="fas fa-laptop"></i> Equipamento
+                </li>
+                <li class="menu-item" onclick="toggleTopicContent('login')">
+                    <i class="fas fa-user"></i> Login
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="topics-container">
+                <p id="no-data-message" style="display: none;">Nenhum chamado para visualização.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/consultar-chamados.js"></script>
+    <script>
+        window.onload = loadData();
+    </script>
+</body>
+</html>
