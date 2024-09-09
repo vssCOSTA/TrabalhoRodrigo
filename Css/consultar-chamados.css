@@ -71,12 +71,15 @@ body {
 }
 
 .topic-content {
-    display: none;
+    display: block; /* Altere para block se estiver usando display: none em outro lugar */
     background: #2f2841;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 10px 40px #00000056;
+    max-width: 1000px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
 }
+
 
 .topic-content h3 {
     color: #00ff88;
