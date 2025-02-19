@@ -1,0 +1,223 @@
+/* Reset e configurações básicas */
+body {
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    background: #201b2c;
+    color: white;
+}
+
+/* Navegação */
+.navegacao {
+    display: flex;
+    align-items: center;
+    background: #43a047;
+    padding: 0 20px;
+    /* z-index: 1; */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    cursor: pointer;
+}
+
+/* Container principal */
+.main-container {
+    display: flex;
+    flex-direction: row; /* Alinha barra lateral e conteúdo principal lado a lado */
+    height: calc(100vh - 100px);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2f2841;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Exibe itens do menu em linha */
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    gap: 10px; /* Espaçamento entre itens do menu */
+}
+
+.menu-item {
+    padding: 10px;
+    color: #00ff88;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    flex: 1 1 auto; /* Permite que os itens cresçam e encolham */
+    text-align: center; /* Centraliza o texto dos itens */
+}
+
+.menu-item:hover {
+    background: #00ff88;
+    color: #2b134b;
+}
+
+/* Conteúdo */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Garante rolagem no conteúdo */
+}
+
+.topic-content {
+    display: block; /* Altere para block se estiver usando display: none em outro lugar */
+    background: #2f2841;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+    max-width: 1000px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+}
+
+
+.topic-content h3 {
+    color: #00ff88;
+    font-weight: 800;
+}
+
+/* Data blocks */
+.data-card {
+    background: #2f2841;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.data-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.data-item-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.data-item label {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 150px; /* Define uma largura mínima para os rótulos */
+    flex-shrink: 0; /* Impede que o rótulo diminua */
+    text-align: right; /* Alinha o texto à direita */
+}
+
+.data-item input {
+    flex-grow: 1; /* Permite que o campo de entrada ocupe o espaço restante */
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+}
+
+button {
+    padding: 15px;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 8px;
+    color: #2b134b;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00ff8052;
+    transition: background 0.3s ease;
+    margin: 15px;
+}
+
+button:hover {
+    background-color: #00cc77;
+}
+
+button:active {
+    background-color: #009955;
+}
+
+.actions {
+    display: flex;
+    margin-top: 10px;
+}
+
+.actions button {
+    margin-left: 10px; /* Espaço entre os botões */
+}
+
+.actions button.save {
+    margin-left: 20px; /* Aumenta o espaço para o botão de salvar alterações */
+}
+
+.delete {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete:hover {
+    background-color: #cc0000;
+}
+
+#no-data-message {
+    color: #ff4d4d;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Muda para coluna em telas menores */
+        height: auto; /* Ajusta a altura conforme o conteúdo */
+    }
+
+    .sidebar {
+        width: 100%;
+        box-shadow: none; /* Remove a sombra da sidebar em telas pequenas */
+        padding: 10px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .actions {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .actions button {
+        margin-left: 0;
+        margin-top: 10px; /* Adiciona espaço entre os botões na coluna */
+    }
+
+    .data-item-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+
+
+    .data-item label {
+        font-size: 14px; /* Reduz o tamanho da fonte do rótulo */
+    }
+
+    .data-item input {
+        font-size: 14px; /* Reduz o tamanho da fonte do input */
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px; /* Reduz o tamanho da fonte dos botões */
+    }
+}

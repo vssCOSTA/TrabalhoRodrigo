@@ -1,0 +1,205 @@
+/* Estilos gerais */
+body {
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    background: #201b2c;
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    background: #43a047;
+    padding: 0 20px;
+    /* z-index: 1; */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.logo {
+    height: 80px; 
+    width: auto;
+    cursor: pointer; 
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row; /* Alinha barra lateral e conteúdo principal lado a lado */
+    height: calc(100vh - 100px);
+    overflow: hidden; /* Garante que não haja rolagem indesejada */
+}
+
+.sidebar {
+    width: 250px;
+    background: #2f2841;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Exibe itens do menu em linha */
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    gap: 10px; /* Espaçamento entre itens do menu */
+}
+
+.menu-item {
+    padding: 10px;
+    color: #00ff88;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    flex: 1 1 auto; /* Permite que os itens cresçam e encolham */
+    text-align: center; /* Centraliza o texto dos itens */
+}
+
+.menu-item:hover {
+    background: #00ff88;
+    color: #2b134b;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Garante rolagem no conteúdo */
+}
+
+.sub-menu {
+    display: none;
+    background: #2f2841;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.sub-menu h2 {
+    color: #00ff88;
+}
+
+.sub-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sub-menu li {
+    color: #f0ffff;
+    padding: 5px 0;
+}
+
+#form-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dynamic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #2f2841;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.dynamic-form h2 {
+    color: #00ff88;
+    font-weight: 800;
+}
+
+.dynamic-form label {
+    color: #f0ffffde;
+}
+
+.dynamic-form input,
+.dynamic-form select,
+.dynamic-form textarea {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: #514869;
+    color: #f0ffffde;
+    font-size: 14px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.dynamic-form button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #00ff88;
+    color: #2b134b;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00ff8052;
+    transition: background 0.3s ease;
+}
+
+.dynamic-form button:hover {
+    background: #00cc77;
+}
+
+.dynamic-form button:active {
+    background: #009955;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    /* .navegacao {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    } */
+
+    .logo {
+        height: 80px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        height: auto; /* Ajusta a altura conforme o conteúdo */
+    }
+
+    .sidebar {
+        width: 100%;
+        box-shadow: none;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .dynamic-form {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        height: 80px;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .menu-item {
+        padding: 8px;
+    }
+
+    .dynamic-form {
+        padding: 10px;
+    }
+
+    .dynamic-form input,
+    .dynamic-form select,
+    .dynamic-form textarea {
+        font-size: 12px;
+    }
+}
